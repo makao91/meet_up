@@ -46,7 +46,7 @@ class LoginUserServiceTest extends TestCase
      *
      * @test
      */
-    public function login_loginWithValidUserCredentials(): void
+    public function login_loginWithValidUserCredentials_tokenSaved(): void
     {
         // GIVEN
         $this->setFakeNow('2022-06-22');
@@ -75,7 +75,7 @@ class LoginUserServiceTest extends TestCase
      *
      * @test
      */
-    public function login_loginWithInvalidUserPassword(): void
+    public function login_loginWithInvalidUserPassword_throwError(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -102,7 +102,7 @@ class LoginUserServiceTest extends TestCase
      *
      * @test
      */
-    public function login_loginWithNonExistingEmail(): void
+    public function login_loginWithNonExistingEmail_throwError(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -129,7 +129,7 @@ class LoginUserServiceTest extends TestCase
      *
      * @test
      */
-    public function login_emailNotVerified(): void
+    public function login_emailNotVerified_throwError(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -158,7 +158,7 @@ class LoginUserServiceTest extends TestCase
      *
      * @test
      */
-    public function getUserDetails_userExists(): void
+    public function getUserDetails_userExists_returnUser(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -187,7 +187,7 @@ class LoginUserServiceTest extends TestCase
      *
      * @test
      */
-    public function getUserDetails_userNotExists(): void
+    public function getUserDetails_userNotExists_throwError(): void
     {
         // GIVEN
         $service = $this->createService();
@@ -209,7 +209,7 @@ class LoginUserServiceTest extends TestCase
      *
      * @test
      */
-    public function logout_performLogoutAction(): void
+    public function logout_performLogoutAction_removeToken(): void
     {
         // GIVEN
         $user = $this->createUser();

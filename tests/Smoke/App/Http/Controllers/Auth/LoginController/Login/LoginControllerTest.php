@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Smoke\App\Http\Controllers\Auth\LoginController;
+namespace Tests\Smoke\App\Http\Controllers\Auth\LoginController\Login;
 
-use Tests\TestCase;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class LoginControllerTest extends TestCase
 {
@@ -22,7 +22,7 @@ class LoginControllerTest extends TestCase
      *
      * @test
      */
-    public function login_loginWithValidUserCredentialsAsCandidate(): void
+    public function login_loginWithValidCredentials_validResponse(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -55,7 +55,7 @@ class LoginControllerTest extends TestCase
      *
      * @test
      */
-    public function login_loginWithInvalidUserPassword(): void
+    public function login_loginWithInvalidUserPassword_unauthorized(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -85,11 +85,11 @@ class LoginControllerTest extends TestCase
      * @scenario Login user
      * @case Login with invalid user email
      *
-     * @expectation Return 422, ivalid email
+     * @expectation Return 422, invalid email
      *
      * @test
      */
-    public function login_loginWithInvalidEmail(): void
+    public function login_loginWithInvalidEmail_validationError(): void
     {
         // GIVEN
         $email = 'testdevpark.pl';

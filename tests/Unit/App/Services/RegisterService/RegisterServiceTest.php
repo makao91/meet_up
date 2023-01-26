@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Unit\App\Services\RegisterService;
 
 use Tests\TestCase;
-use App\Models\User;
 use App\Services\RegisterService;
 use Illuminate\Hashing\HashManager;
 use App\Exceptions\Http\EmailAlreadyExistsException;
@@ -39,7 +38,7 @@ class RegisterServiceTest extends TestCase
      *
      * @test
      */
-    public function register_newUser(): void
+    public function register_newUser_createNewUser(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -67,7 +66,7 @@ class RegisterServiceTest extends TestCase
      *
      * @test
      */
-    public function register_userExists(): void
+    public function register_userExists_throwError(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -96,7 +95,7 @@ class RegisterServiceTest extends TestCase
      *
      * @test
      */
-    public function confirmEmail_confirmed(): void
+    public function confirmEmail_confirmed_saveEmailVerifiedAt(): void
     {
         // GIVEN
         $email = 'test@devpark.pl';
@@ -123,7 +122,7 @@ class RegisterServiceTest extends TestCase
      * @expectation throw Invalid Confirm Email Token Exception
      * @test
      */
-    public function confirmEmail_alreadyConfirmed(): void
+    public function confirmEmail_alreadyConfirmed_throwError(): void
     {
         // GIVEN
         $this->setFakeNow();
@@ -151,7 +150,7 @@ class RegisterServiceTest extends TestCase
      * @expectation throw Invalid Confirm Email Token Exception
      * @test
      */
-    public function confirmEmail_invalidToken(): void
+    public function confirmEmail_invalidToken_throwError(): void
     {
         // GIVEN
         $this->setFakeNow();

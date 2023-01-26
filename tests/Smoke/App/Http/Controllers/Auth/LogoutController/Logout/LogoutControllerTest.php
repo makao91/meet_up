@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Smoke\App\Http\Controllers\Auth\LogoutController;
+namespace Tests\Smoke\App\Http\Controllers\Auth\LogoutController\Logout;
 
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\TestCase;
 
 class LogoutControllerTest extends TestCase
 {
@@ -21,7 +21,7 @@ class LogoutControllerTest extends TestCase
      *
      * @test
      */
-    public function logout_performLogoutActionByNotLoggedUser(): void
+    public function logout_performLogoutActionByNotLoggedUser_unauthorized(): void
     {
         // GIVEN
 
@@ -41,7 +41,7 @@ class LogoutControllerTest extends TestCase
      *
      * @test
      */
-    public function logout_performLogoutActionByCandidate(): void
+    public function logout_performLogoutAction_success(): void
     {
         // GIVEN
         $user = $this->createAndBeUser();

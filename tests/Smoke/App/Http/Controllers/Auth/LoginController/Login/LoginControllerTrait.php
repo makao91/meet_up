@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Smoke\App\Http\Controllers\Auth\LoginController;
+namespace Tests\Smoke\App\Http\Controllers\Auth\LoginController\Login;
 
 use App\Models\User;
 
