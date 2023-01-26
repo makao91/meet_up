@@ -1,0 +1,41 @@
+version: "3.7"
+
+services:
+    php:
+        container_name: "${PROJECT_NAME}_php_test"
+        image: ${PROJECT_NAME}_php
+        restart: unless-stopped
+        working_dir: /var/www/entry
+        volumes:
+            - ../../../:/var/www
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
+        environment:
+            PHP_IDE_CONFIG: serverName=server
+        links:
+            - db
+            - redis
+
+    db:
+        image: postgres:15.1-alpine
+        container_name: "${PROJECT_NAME}_db_test"
+        restart: unless-stopped
+        ports:
+            - "${DATABASE_PORT}:5432"
+        volumes:
+            - db_volume:/data/postgres
+        environment:
+            POSTGRES_DATABASE: "${PROJECT_NAME}_db_test"
+            POSTGRES_USER: app
+            POSTGRES_PASSWORD: app
+            PGDATA: /data/postgres
+
+    redis:
+        image: "redis:alpine"
+        container_name: "${PROJECT_NAME}_redis_test"
+        ports:
+            - "${REDIS_PORT}:6379"
+
+volumes:
+    db_volume:
+        name: ${PROJECT_NAME}_db_test_volume
